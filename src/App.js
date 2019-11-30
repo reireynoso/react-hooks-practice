@@ -1,33 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import CharacterInfoPage from './CharacterInfoPage'
 
-class App extends React.Component {
-  state = {
-    characterChoiceNumbers: [1,2,3,4,5],
-    chosenChoiceNumber: 1
-  }
+const App = () => {
 
-  handleChoiceChange = (newNumber) => {
-    this.setState({
-      chosenChoiceNumber: newNumber
-    })
-  }
+  const [characterChoiceNumbers, setCharacterChoiceNumbers] = useState([1,2,3,4,5])
+  const [chosenChoiceNumber, setChosenChoiceNumber] = useState(1)
 
-  render(){
-    // console.log(this.state.chosenChoiceNumber)
-    return(
-      <div>
-        <select onChange={(e)=> this.handleChoiceChange(e.target.value)}>
-          {
-            this.state.characterChoiceNumbers.map(choice => <option key={choice}>{choice}</option>)
-          }
-        </select>
-        <CharacterInfoPage chosenChoiceNumber={this.state.chosenChoiceNumber}/>
-      </div>
-    )
+  const handleChoiceChange = (newNumber) => {
+    setChosenChoiceNumber(newNumber)
   }
+  return(
+    <div>
+      <select onChange={(e)=> handleChoiceChange(e.target.value)}>
+        {
+          characterChoiceNumbers.map(choice => <option key={choice}>{choice}</option>)
+        }
+      </select>
+      <CharacterInfoPage chosenChoiceNumber={chosenChoiceNumber}/>
+    </div>
+  )
+  
 }
-
 
 export default App;
